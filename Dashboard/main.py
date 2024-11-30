@@ -1,6 +1,7 @@
 import streamlit as st
 from data_loader import load_data
 from preprocessing import preprocess_data
+import os
 from visualizations import plot_bike_rentals_by_day_type_and_season, plot_average_rentals_by_time_bin
 from utils import display_summary
 
@@ -9,8 +10,9 @@ def main():
     st.title("Bike Rental Analysis Dashboard")
 
     st.sidebar.title("Configuration")
-    hourly_path = "../Data/hour.csv"
-    daily_path = "../Data/day.csv"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    hourly_path = os.path.join(base_dir, "../Data/hour.csv")
+    daily_path = os.path.join(base_dir, "../Data/day.csv")
 
     # Load and preprocess data
     hourly_df, daily_df = load_data(hourly_path, daily_path)
